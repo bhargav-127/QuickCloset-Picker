@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Outfits - QuickCloset Picker</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-tshirt"></i>
+                <h1>QuickCloset Picker</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="upload.html">Add Items</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Gallery <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="gallery.html?category=shirts">Shirts & T-shirts</a></li>
+                        <li><a href="gallery.html?category=pants">Pants & Joggers</a></li>
+                        <li><a href="gallery.html?category=accessories">Accessories</a></li>
+                        <li><a href="gallery.html?category=shoes">Shoes</a></li>
+                    </ul>
+                </li>
+                <li><a href="outfit-builder.html">Outfit Builder</a></li>
+                <li><a href="saved-outfits.html" class="active">Saved Outfits</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="content">
+        <div class="container">
+            <div class="page-header">
+                <h2><i class="fas fa-bookmark"></i> Saved Outfits</h2>
+                <p>View and manage your favorite outfit combinations</p>
+            </div>
+
+            <div class="outfits-info">
+                <span id="outfitCount">0 saved outfits</span>
+            </div>
+
+            <div class="saved-outfits-grid" id="savedOutfitsGrid">
+                <!-- Saved outfits will be loaded here -->
+            </div>
+
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <i class="fas fa-inbox"></i>
+                <h3>No saved outfits yet</h3>
+                <p>Create and save outfits using the Outfit Builder</p>
+                <a href="outfit-builder.html" class="btn btn-primary">
+                    <i class="fas fa-magic"></i> Create Outfit
+                </a>
+            </div>
+
+            <div class="loading-spinner" id="loadingSpinner">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading outfits...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- View Outfit Modal -->
+    <div class="modal" id="viewModal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3 id="modalOutfitName">Outfit Details</h3>
+                <button class="modal-close" id="closeViewModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="outfit-details-grid" id="outfitDetailsGrid">
+                    <!-- Outfit items will be displayed here -->
+                </div>
+                <div class="outfit-notes" id="outfitNotes" style="display: none;">
+                    <h4>Notes:</h4>
+                    <p id="notesText"></p>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-danger" id="deleteOutfitBtn">
+                    <i class="fas fa-trash"></i> Delete Outfit
+                </button>
+                <button class="btn btn-secondary" id="closeDetailsBtn">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 QuickCloset Picker. Your virtual wardrobe assistant.</p>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/saved-outfits.js"></script>
+</body>
+</html>

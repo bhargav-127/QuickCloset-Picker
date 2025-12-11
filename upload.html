@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Items - QuickCloset Picker</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-tshirt"></i>
+                <h1>QuickCloset Picker</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="upload.html" class="active">Add Items</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Gallery <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="gallery.html?category=shirts">Shirts & T-shirts</a></li>
+                        <li><a href="gallery.html?category=pants">Pants & Joggers</a></li>
+                        <li><a href="gallery.html?category=accessories">Accessories</a></li>
+                        <li><a href="gallery.html?category=shoes">Shoes</a></li>
+                    </ul>
+                </li>
+                <li><a href="outfit-builder.html">Outfit Builder</a></li>
+                <li><a href="saved-outfits.html">Saved Outfits</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="content">
+        <div class="container">
+            <div class="page-header">
+                <h2><i class="fas fa-upload"></i> Add New Item</h2>
+                <p>Upload your wardrobe items with images and organize them by category</p>
+            </div>
+
+            <div class="upload-container">
+                <form id="uploadForm" class="upload-form">
+                    <div class="form-group">
+                        <label for="itemTitle">Item Name *</label>
+                        <input type="text" id="itemTitle" name="title" required placeholder="e.g., Blue Denim Jacket">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="itemCategory">Category *</label>
+                        <select id="itemCategory" name="category" required>
+                            <option value="">Select a category</option>
+                            <option value="shirts">Shirts & T-shirts</option>
+                            <option value="pants">Pants & Joggers</option>
+                            <option value="accessories">Accessories</option>
+                            <option value="shoes">Shoes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="itemTags">Tags (comma-separated)</label>
+                        <input type="text" id="itemTags" name="tags" placeholder="e.g., casual, summer, blue">
+                        <small>Separate tags with commas to help organize your items</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Item Image *</label>
+                        <div class="image-upload-area" id="imageUploadArea">
+                            <input type="file" id="itemImage" accept="image/*" hidden>
+                            <div class="upload-placeholder" id="uploadPlaceholder">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Click to upload or drag and drop</p>
+                                <small>PNG, JPG, JPEG, GIF up to 5MB</small>
+                            </div>
+                            <div class="image-preview" id="imagePreview" style="display: none;">
+                                <img id="previewImg" src="" alt="Preview">
+                                <button type="button" class="remove-image" id="removeImage">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Item
+                        </button>
+                        <button type="reset" class="btn btn-secondary">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </form>
+
+                <div class="upload-tips">
+                    <h3><i class="fas fa-lightbulb"></i> Tips for Best Results</h3>
+                    <ul>
+                        <li>Use clear, well-lit photos with plain backgrounds</li>
+                        <li>Center the item in the frame</li>
+                        <li>Take photos from the same angle for consistency</li>
+                        <li>Use descriptive names and tags for easy searching</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="success-message" id="successMessage" style="display: none;">
+                <i class="fas fa-check-circle"></i>
+                <span>Item added successfully!</span>
+            </div>
+
+            <div class="error-message" id="errorMessage" style="display: none;">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorText">An error occurred. Please try again.</span>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 QuickCloset Picker. Your virtual wardrobe assistant.</p>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/upload.js"></script>
+</body>
+</html>

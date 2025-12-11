@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickCloset Picker - Your Virtual Wardrobe</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-tshirt"></i>
+                <h1>QuickCloset Picker</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="upload.html">Add Items</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Gallery <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="gallery.html?category=shirts">Shirts & T-shirts</a></li>
+                        <li><a href="gallery.html?category=pants">Pants & Joggers</a></li>
+                        <li><a href="gallery.html?category=accessories">Accessories</a></li>
+                        <li><a href="gallery.html?category=shoes">Shoes</a></li>
+                    </ul>
+                </li>
+                <li><a href="outfit-builder.html">Outfit Builder</a></li>
+                <li><a href="saved-outfits.html">Saved Outfits</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-title">Your Personal Virtual Wardrobe</h2>
+                <p class="hero-subtitle">Organize your wardrobe, create perfect outfits, and never wonder what to wear again!</p>
+                <div class="hero-buttons">
+                    <a href="upload.html" class="btn btn-primary">
+                        <i class="fas fa-upload"></i> Add Items
+                    </a>
+                    <a href="outfit-builder.html" class="btn btn-secondary">
+                        <i class="fas fa-magic"></i> Build Outfit
+                    </a>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3>Shirts & T-shirts</h3>
+                    <p>Organize all your tops in one place</p>
+                    <a href="gallery.html?category=shirts" class="feature-link">View Gallery →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-socks"></i>
+                    </div>
+                    <h3>Pants & Joggers</h3>
+                    <p>Keep track of your bottoms collection</p>
+                    <a href="gallery.html?category=pants" class="feature-link">View Gallery →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>Accessories</h3>
+                    <p>Caps, rings, chains, and more</p>
+                    <a href="gallery.html?category=accessories" class="feature-link">View Gallery →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shoe-prints"></i>
+                    </div>
+                    <h3>Shoes</h3>
+                    <p>Complete your look with the perfect pair</p>
+                    <a href="gallery.html?category=shoes" class="feature-link">View Gallery →</a>
+                </div>
+            </div>
+
+            <div class="quick-stats" id="quickStats">
+                <div class="stat-item">
+                    <div class="stat-number" id="totalItems">0</div>
+                    <div class="stat-label">Total Items</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="totalOutfits">0</div>
+                    <div class="stat-label">Saved Outfits</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="totalShirts">0</div>
+                    <div class="stat-label">Shirts</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="totalPants">0</div>
+                    <div class="stat-label">Pants</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 QuickCloset Picker. Your virtual wardrobe assistant.</p>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

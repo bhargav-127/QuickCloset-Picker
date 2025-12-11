@@ -1,0 +1,6 @@
+{
+  "/tables/wardrobe_items": "/wardrobe_items",
+  "/tables/wardrobe_items/:id": "/wardrobe_items/:id",
+  "/tables/saved_outfits": "/saved_outfits",
+  "/tables/saved_outfits/:id": "/saved_outfits/:id"
+}

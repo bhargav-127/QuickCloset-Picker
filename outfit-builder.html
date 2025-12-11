@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outfit Builder - QuickCloset Picker</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-tshirt"></i>
+                <h1>QuickCloset Picker</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="upload.html">Add Items</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Gallery <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="gallery.html?category=shirts">Shirts & T-shirts</a></li>
+                        <li><a href="gallery.html?category=pants">Pants & Joggers</a></li>
+                        <li><a href="gallery.html?category=accessories">Accessories</a></li>
+                        <li><a href="gallery.html?category=shoes">Shoes</a></li>
+                    </ul>
+                </li>
+                <li><a href="outfit-builder.html" class="active">Outfit Builder</a></li>
+                <li><a href="saved-outfits.html">Saved Outfits</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="content">
+        <div class="container">
+            <div class="page-header">
+                <h2><i class="fas fa-magic"></i> Outfit Builder</h2>
+                <p>Create the perfect outfit by selecting items from each category</p>
+            </div>
+
+            <div class="builder-actions">
+                <button class="btn btn-secondary" id="randomizeBtn">
+                    <i class="fas fa-random"></i> Randomize Outfit
+                </button>
+                <button class="btn btn-primary" id="saveOutfitBtn" disabled>
+                    <i class="fas fa-save"></i> Save Outfit
+                </button>
+                <button class="btn btn-secondary" id="clearSelectionBtn">
+                    <i class="fas fa-redo"></i> Clear Selection
+                </button>
+            </div>
+
+            <div class="outfit-preview">
+                <h3>Your Outfit Preview</h3>
+                <div class="outfit-display">
+                    <div class="outfit-item" id="selectedShirt">
+                        <div class="outfit-item-placeholder">
+                            <i class="fas fa-tshirt"></i>
+                            <p>Select a Shirt</p>
+                        </div>
+                    </div>
+                    <div class="outfit-item" id="selectedPants">
+                        <div class="outfit-item-placeholder">
+                            <i class="fas fa-socks"></i>
+                            <p>Select Pants</p>
+                        </div>
+                    </div>
+                    <div class="outfit-item" id="selectedAccessories">
+                        <div class="outfit-item-placeholder">
+                            <i class="fas fa-gem"></i>
+                            <p>Select Accessories</p>
+                        </div>
+                    </div>
+                    <div class="outfit-item" id="selectedShoes">
+                        <div class="outfit-item-placeholder">
+                            <i class="fas fa-shoe-prints"></i>
+                            <p>Select Shoes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item-selector">
+                <div class="selector-section">
+                    <h3><i class="fas fa-tshirt"></i> Shirts & T-shirts</h3>
+                    <div class="selector-grid" id="shirtsGrid">
+                        <div class="loading-spinner">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="selector-section">
+                    <h3><i class="fas fa-socks"></i> Pants & Joggers</h3>
+                    <div class="selector-grid" id="pantsGrid">
+                        <div class="loading-spinner">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="selector-section">
+                    <h3><i class="fas fa-gem"></i> Accessories</h3>
+                    <div class="selector-grid" id="accessoriesGrid">
+                        <div class="loading-spinner">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="selector-section">
+                    <h3><i class="fas fa-shoe-prints"></i> Shoes</h3>
+                    <div class="selector-grid" id="shoesGrid">
+                        <div class="loading-spinner">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Save Outfit Modal -->
+    <div class="modal" id="saveModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Save Your Outfit</h3>
+                <button class="modal-close" id="closeSaveModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="saveOutfitForm">
+                <div class="form-group">
+                    <label for="outfitName">Outfit Name *</label>
+                    <input type="text" id="outfitName" required placeholder="e.g., Casual Friday Look">
+                </div>
+                <div class="form-group">
+                    <label for="outfitNotes">Notes (optional)</label>
+                    <textarea id="outfitNotes" rows="3" placeholder="Add any notes about this outfit..."></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check"></i> Save Outfit
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="cancelSave">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 QuickCloset Picker. Your virtual wardrobe assistant.</p>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/outfit-builder.js"></script>
+</body>
+</html>
