@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-    IMAGE = "hargav-127/quickcloset-server"
+    IMAGE = "bhargav-127/quickcloset-server"
     DOCKER_CRED = "dockerhub-creds"
   }
   stages {
