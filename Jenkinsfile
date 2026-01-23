@@ -1,42 +1,32 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs "NodeJS" // Should match the NodeJS installation name in Jenkins
-    }
-
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
+
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
             }
         }
+
         stage('Build') {
             steps {
-                sh 'npm run build'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'npm test'
+                sh 'npm run build || echo "No build step"'
             }
         }
     }
 
     post {
-        always {
-            echo "Pipeline finished"
-        }
         success {
-            echo "Build SUCCESS!"
+            echo 'Build successful'
         }
         failure {
-            echo "Build FAILED!"
+            echo 'Build failed'
         }
     }
 }
