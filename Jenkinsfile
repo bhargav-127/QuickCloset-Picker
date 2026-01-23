@@ -15,22 +15,14 @@ pipeline {
                 }
             }
         }
-
-        stage('Build') {
-            steps {
-                dir('server') {
-                    bat 'npm run build || echo Build step skipped'
-                }
-            }
-        }
     }
 
     post {
         success {
-            echo 'Build successful'
+            echo 'Pipeline completed successfully'
         }
         failure {
-            echo 'Build failed'
+            echo 'Pipeline failed'
         }
     }
 }
