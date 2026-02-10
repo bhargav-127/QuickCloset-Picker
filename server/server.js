@@ -12,6 +12,15 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json({ limit: '10mb' }));
 
+// Serve frontend files (HTML, CSS, JS)
+app.use(express.static(path.join(__dirname, '../')));
+
+// Default route: index.html
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../index.html'));
+});
+
+
 const PORT = process.env.PORT || 3000;
 
 // Helper: parse tags stored as JSON string
