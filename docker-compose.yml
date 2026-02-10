@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  quickcloset:
+    build:
+      context: .        # root folder
+      dockerfile: Dockerfile
+    container_name: quickcloset-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./server/data.db:/usr/src/app/server/data.db   # persist SQLite database
+    restart: unless-stopped
+  nginx:
+    image: nginx:latest 
+    container_name: quickcloset-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro  # nginx configuration
+    depends_on:
+      - quickcloset   
+        
