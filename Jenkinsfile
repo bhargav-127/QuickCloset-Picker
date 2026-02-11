@@ -2,64 +2,92 @@ pipeline {
     agent any
 
     environment {
-        SERVICE_NAME = "quickcloset-app"
-        IMAGE_NAME = "quickcloset-app_image"
-        COMPOSE_FILE = "docker-compose.yml"
+        IMAGE_NAME = "quickcloset-app"
+        CONTAINER_NAME = "quickcloset-app"
+        PORT = "3000"
+        GIT_REPO = "https://github.com/bhargav-127/QuickCloset-Picker.git"
+        BRANCH = "main"
     }
 
     stages {
-        stage('Clone Repo') {
+
+        stage('Clean Workspace') {
             steps {
-                // Clean workspace
                 deleteDir()
-                // Clone GitHub repo
-                git branch: 'main', url: 'https://github.com/bhargav-127/QuickCloset-Picker.git'
             }
         }
 
-        stage('Cleanup Old Containers & Images') {
+        stage('Clone Repository') {
             steps {
-                script {
-                    // Stop and remove old container if exists
-                    sh """
-                    if [ \$(docker ps -a -q -f name=${SERVICE_NAME}) ]; then
-                        docker stop ${SERVICE_NAME}
-                        docker rm ${SERVICE_NAME}
-                    fi
-                    """
-
-                    // Remove old image if exists
-                    sh """
-                    if [ \$(docker images -q ${IMAGE_NAME}) ]; then
-                        docker rmi -f ${IMAGE_NAME}
-                    fi
-                    """
-                }
+                git branch: "${BRANCH}", url: "${GIT_REPO}"
             }
         }
 
-        stage('Build & Run Docker Compose') {
+        stage('Remove Old Container') {
             steps {
-                script {
-                    // Build and start container in detached mode
-                    sh "docker-compose up"
-                }
+                sh '''
+                if [ "$(docker ps -aq -f name=${CONTAINER_NAME})" ]; then
+                    echo "Stopping old container..."
+                    docker stop ${CONTAINER_NAME} || true
+                    docker rm ${CONTAINER_NAME} || true
+                else
+                    echo "No old container found."
+                fi
+                '''
+            }
+        }
+
+        stage('Remove Old Image') {
+            steps {
+                sh '''
+                if [ "$(docker images -q ${IMAGE_NAME})" ]; then
+                    echo "Removing old image..."
+                    docker rmi -f ${IMAGE_NAME} || true
+                else
+                    echo "No old image found."
+                fi
+                '''
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh '''
+                echo "Building new Docker image..."
+                docker build -t ${IMAGE_NAME} .
+                '''
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                sh '''
+                echo "Starting new container..."
+                docker run -d \
+                  -p ${PORT}:3000 \
+                  --name ${CONTAINER_NAME} \
+                  ${IMAGE_NAME}
+                '''
             }
         }
 
         stage('Verify Deployment') {
             steps {
-                sh "docker ps | grep ${SERVICE_NAME} || echo '❌ Container not running!'"
+                sh '''
+                echo "Checking running container..."
+                docker ps | grep ${CONTAINER_NAME}
+                '''
             }
         }
     }
 
     post {
         success {
-            echo "✅ Deployment successful! Visit http://<your-server-ip>:3000/"
+            echo "✅ Deployment Successful!"
+            echo "🌍 Visit: http://<EC2-PUBLIC-IP>:3000/"
         }
         failure {
-            echo "❌ Deployment failed!"
+            echo "❌ Deployment Failed!"
         }
     }
 }
