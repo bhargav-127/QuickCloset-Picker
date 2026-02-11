@@ -1,28 +1,24 @@
-# Use Node.js LTS
-FROM node:18
+# Use official Node image
+FROM node:18-alpine
 
-# Set working directory
-WORKDIR /usr/src/app
+# Create app directory
+WORKDIR /app
 
-# Copy backend files
+# Copy server package files first (better caching)
 COPY server/package*.json ./server/
-COPY server/server.js ./server/
-COPY server/init_db.js ./server/
-COPY server/data.db ./server/
 
-# Install backend dependencies
-WORKDIR /usr/src/app/server
-RUN npm install
+# Install server dependencies
+WORKDIR /app/server
+RUN npm install --production
 
-# Copy frontend files
-WORKDIR /usr/src/app
-COPY *.html ./
-COPY css ./css
-COPY js ./js
+# Go back to app root
+WORKDIR /app
+
+# Copy entire project
+COPY . .
 
 # Expose port
 EXPOSE 3000
 
-# Start server
-WORKDIR /usr/src/app/server
-CMD ["node", "server.js"]
+# Initialize database (if not exists) and start server
+CMD ["sh", "-c", "node server/init_db.js && node server/server.js"]
